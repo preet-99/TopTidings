@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/TopTidings/static/css/main.f855e6bc.css",
+    "main.js": "/TopTidings/static/js/main.cc1d3d2d.js",
+    "static/js/453.b2157c12.chunk.js": "/TopTidings/static/js/453.b2157c12.chunk.js",
+    "static/media/loading.gif": "/TopTidings/static/media/loading.4c426050cccd3e57e3a4.gif",
+    "index.html": "/TopTidings/index.html",
+    "main.f855e6bc.css.map": "/TopTidings/static/css/main.f855e6bc.css.map",
+    "main.cc1d3d2d.js.map": "/TopTidings/static/js/main.cc1d3d2d.js.map",
+    "453.b2157c12.chunk.js.map": "/TopTidings/static/js/453.b2157c12.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.cc1d3d2d.js"
+  ]
+}
