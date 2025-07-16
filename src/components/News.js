@@ -30,25 +30,27 @@ const News = (props) => {
     * Fetches news articles from the API based on current props and page state.
     * Also updates progress at different stages using the setProgress prop.
     */
-    const updateNews = async () => {
+   const updateNews = async () => {
+    props.setProgress(10);
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+    setLoading(true);
+    let data = await fetch(url);
+    props.setProgress(30);
+    let parsedData = await data.json();
+    props.setProgress(50);
 
-        props.setProgress(10);
-
-        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
-        setLoading(true);
-        let data = await fetch(url);
-        props.setProgress(30);
-        let parsedData = await data.json();
-        props.setProgress(50);
-
-        setArticles(
-            parsedData.articles
-        );
-        setLoading(false);
-        setTotalResults(parsedData.totalResults);
-
-        props.setProgress(100);
+    if (parsedData.articles) {
+        setArticles(parsedData.articles);
+        setTotalResults(parsedData.totalResults || 0);
+    } else {
+        setArticles([]); // fallback to prevent crash
+        setTotalResults(0);
     }
+
+    setLoading(false);
+    props.setProgress(100);
+}
+
 
     /**
    * useEffect to fetch initial data when the component mounts.
@@ -64,17 +66,19 @@ const News = (props) => {
     /**
     * Used by InfiniteScroll to load more articles when scrolling.
     */
-    const fetchMoreData = async () => {
-        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1} &pageSize=${props.pageSize}`;
-        setPage(page + 1)
-        let data = await fetch(url);
-        let parsedData = await data.json();
+   const fetchMoreData = async () => {
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`;
+    setPage(page + 1);
+    let data = await fetch(url);
+    let parsedData = await data.json();
 
+    if (parsedData.articles) {
         setArticles(articles.concat(parsedData.articles));
-        setLoading(false);
-        setTotalResults(parsedData.totalResults);
+        setTotalResults(parsedData.totalResults || 0);
+    }
+    setLoading(false);
+};
 
-    };
 
     return (
         <>

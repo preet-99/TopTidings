@@ -1,8 +1,7 @@
 {
   "short_name": "TopTidings",
-  "name": "opTidings - Latest News App",
-  "icons": [
-  ],
+  "name": "TopTidings News App",
+  "icons": [],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
